@@ -47,7 +47,7 @@ public class Product {
 	
 	@NotNull
 	@Size(min = 4, max = 100)
-	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀŽČŅa-zēūīļķģšāžčņ.!:- ]+")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀŽČŅa-zēūīļķģšāžčņ.!: ]+")
 	@Column(name = "Description")
 	private String description;
 	
