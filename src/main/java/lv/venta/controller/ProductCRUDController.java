@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,10 +49,34 @@ public class ProductCRUDController {
 		}
 	}
 	
+	@GetMapping("/all/{id}") //localhost:8080/product/crud/all/2
+	public String getProductCRUDById(@PathVariable("id") int id, Model model)
+	{
+		try
+		{
+			Product foundProduct = crudService.retrieveById(id);
+			model.addAttribute("mydata", foundProduct);
+			return "product-show-one-page";//tiks parādīta product-show-one-page.html lapa
+		}
+		catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+	}
 	
+	@GetMapping("/insert") //localhost:8080/product/crud/insert
+	public String getProductCRUDInsert(Model model) {
+		
+		model.addAttribute("product", new Product());
+		return "product-insert-page"; //tiks parādīta product-insert-page.html lapa ar iedotu tuksu produktu
+		
+	}
 	
-	
-	
+	@PostMapping("/insert")
+	public String postProductCRUDInsert(Product product) {//ienāk aizpildītais produkts
+		System.out.println(product);
+		return "redirect:/product/crud/all";
+	}
 	
 	
 
