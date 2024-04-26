@@ -47,14 +47,26 @@ public class ProductServiceImpl implements
 	}
 
 	@Override
-	public void updateById(int id, Product product) {
-		// TODO Auto-generated method stub
+	public void updateById(int id, Product product) throws Exception{
+		//1. solis atrast objektu
+		Product productForUpdating = retrieveById(id);
 		
+		//2. rediget objektu JAVAs līmenī
+		productForUpdating.setTitle(product.getTitle());
+		productForUpdating.setDescription(product.getDescription());
+		productForUpdating.setPrice(product.getPrice());
+		productForUpdating.setQuantity(product.getQuantity());
+		
+		//3. saglaba rediģēto objektu arī repo un DB
+		productRepo.save(productForUpdating);//save šeit strādās kā update
 	}
 
 	@Override
-	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+	public void deleteById(int id) throws Exception {
+		//1. solis atrast proeduktu, kuru gribam dzēst
+		Product productForDeleting = retrieveById(id);
+		//2. dzesam no repo un DB
+		productRepo.delete(productForDeleting);
 		
 	}
 	
