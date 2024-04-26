@@ -24,15 +24,26 @@ public class ProductServiceImpl implements
 	}
 
 	@Override
-	public Product retrieveById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product retrieveById(int id) throws Exception{
+		if(id < 0) throw new Exception("Id should be positive");
+		
+		if(productRepo.existsById(id))
+		{
+			return productRepo.findById(id).get();
+		}
+		else
+		{
+			throw new Exception("Product with this id ("+id+") is not in the system");
+		}
 	}
 
 	@Override
-	public ArrayList<Product> retrieveAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Product> retrieveAll() throws Exception{
+		//TODO izmest izmēņu, ja ir tukša tabula
+		if(productRepo.count() == 0) throw new Exception("Thre is no product in the system");
+			
+		// TODO pretējā gadījumāsa ameklt visus ierakstus no repo (DB)
+		return (ArrayList<Product>) productRepo.findAll();
 	}
 
 	@Override
