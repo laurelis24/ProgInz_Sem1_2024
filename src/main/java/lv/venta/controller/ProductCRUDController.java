@@ -111,7 +111,25 @@ public class ProductCRUDController {
 		}
 
 	}
-
-	// delete
+	//TODO
+	@GetMapping("/delete/{id}")//localhost:8080/product/crud/delete/1
+	public String getProductCRUDDeleteById(@PathVariable("id") int id, Model model) {
+		
+		try {
+			crudService.deleteById(id);
+			ArrayList<Product> allProducts = crudService.retrieveAll();
+			model.addAttribute("mydata", allProducts);
+			return "product-show-all-page";// tiks parādīta producty-show-all-page.html ar visiem produktiem
+	
+		} catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+		
+	}
+	
+	
+	//izveidot jaunu kontrolieru kalsi priekš filter servisa funkcijām
+	//izveidot 4 get mapping funkcijas, kur katra izsauc savu servisa filtrāciajs funkciju
 
 }
