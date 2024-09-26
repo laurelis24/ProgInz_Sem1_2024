@@ -125,4 +125,14 @@ public class ProductServiceImpl implements
 	}
 
 
+	/* 
+	@Override
+	public ArrayList<Product> priceBetween(int from, int to) throws Exception {
+		// TODO Auto-generated method stub
+		ArrayList<Product> products = productRepo.filterByPriceLessThanAndMoreThan(from ,to);
+
+		return products;
+	}
+	*/
+
 }

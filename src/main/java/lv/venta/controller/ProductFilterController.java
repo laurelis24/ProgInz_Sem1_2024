@@ -80,5 +80,22 @@ public class ProductFilterController {
 			return "error-page";
 		}
 	}
-	
+
+	/* 
+	@GetMapping("/price/{from}/{to}") //localhost:8080/product/filter/price/1.99
+	public String getProductFilterBetween(@PathVariable("from") int from, @PathVariable("to") int to,
+			Model model) {
+		try
+		{
+			ArrayList<Product> result = filterService.priceBetween(from, to);
+			model.addAttribute("mydata", result);
+			model.addAttribute("msg", "Products filtered by between");
+			return "product-show-all-page";//tiks parādīta product-show-all-page.html lapa ar izfilrētiem produktiem
+		}
+		catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+	}
+	*/
 }

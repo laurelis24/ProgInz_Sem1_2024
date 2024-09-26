@@ -12,5 +12,7 @@ public interface IProductFilteringService {
 	public abstract ArrayList<Product> filterByTitleOrDescription(String phrase) throws Exception;
 	
 	public abstract float calculateTotalValueOfProducts() throws Exception;
+
+	//public abstract ArrayList<Product> priceBetween(int from, int to) throws Exception;
 	
 }

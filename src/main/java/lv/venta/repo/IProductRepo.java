@@ -32,9 +32,6 @@ public interface IProductRepo extends CrudRepository<Product, Integer>{
 	float calculateTotalValueFromRepoProducts();
 
 	
-	
-	
-	
-	
+	//ArrayList<Product> filterByPriceLessThanAndMoreThan(int from, int to);
 	
 }
