@@ -47,7 +47,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
         .requestMatchers("/").permitAll()
         .requestMatchers("/hello/**").permitAll()
-        .requestMatchers("/product/test").hasAuthority("ADMIN")
+        .requestMatchers("/product/test/**").hasAuthority("ADMIN")
         .requestMatchers("/product/crud/all").permitAll()
         .requestMatchers("/product/crud/one?id=**").permitAll()
         .requestMatchers("/product/crud/all/**").permitAll()

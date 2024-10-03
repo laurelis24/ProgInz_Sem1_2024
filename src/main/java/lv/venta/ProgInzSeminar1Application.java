@@ -4,9 +4,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lv.venta.model.Product;
+import lv.venta.model.security.MyAuthority;
+import lv.venta.model.security.MyUser;
 import lv.venta.repo.IProductRepo;
+import lv.venta.repo.security.IMyAuthorityRepo;
+import lv.venta.repo.security.IMyUserRepo;
 
 @SpringBootApplication
 public class ProgInzSeminar1Application {
@@ -16,7 +22,7 @@ public class ProgInzSeminar1Application {
 	}
 	
 	@Bean //funkcija tiks izsaukta automātiski, līdz ko palaižas sistēma
-	public CommandLineRunner testDatabase(IProductRepo productRepo) {
+	public CommandLineRunner testDatabase(IProductRepo productRepo, IMyAuthorityRepo authRepo, IMyUserRepo userRepo) {
 		return new CommandLineRunner() {
 			
 			@Override
@@ -44,7 +50,17 @@ public class ProgInzSeminar1Application {
 				productRepo.save(productForUpdating);
 				//izveidot servisu
 				
+
+				MyAuthority a1 = new MyAuthority("ADMIN");
+				MyAuthority a2 = new MyAuthority("USER");
+				authRepo.save(a1);
+				authRepo.save(a2);
+
 				
+				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+				MyUser u1 = new MyUser("laurelis", encoder.encode("123"), a1);
+				userRepo.save(u1);
 			}
 		};
 	}
