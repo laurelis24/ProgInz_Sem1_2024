@@ -2,6 +2,8 @@ package lv.venta.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -19,27 +21,22 @@ public class SecurityConfig {
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Bean
-    public UserDetailsManager createDemoUsers(){
-        UserDetails details1 = User.builder()
-        .username("laurelis")
-        .password(encoder.encode("123"))
-        .authorities("ADMIN")
-        .build();
-
-        UserDetails details2 = User.builder()
-        .username("lauris1")
-        .password(encoder.encode("123"))
-        .authorities("USER")
-        .build();
-
-        UserDetails details3 = User.builder()
-        .username("lauris2")
-        .password(encoder.encode("123"))
-        .authorities("USER")
-        .build();
-
-        return new InMemoryUserDetailsManager(details1, details2, details3);
+    public MyUserDetailsManager getDetailsService(){
+        return new MyUserDetailsManager();
     }
+
+    @Bean
+    public DaoAuthenticationProvider createProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+        provider.setPasswordEncoder(encoder);
+        provider.setUserDetailsService(getDetailsService());
+
+        return provider;
+    }
+
+  
 
 
     @Bean
