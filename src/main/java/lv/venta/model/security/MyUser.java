@@ -1,5 +1,6 @@
 package lv.venta.model.security;
 
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.DialectOverride.GeneratedColumns;
 
 import jakarta.persistence.Column;
@@ -7,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +32,13 @@ public class MyUser {
     @Column(name = "Password")
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "AuthorityId")
+    private MyAuthority authority;
 
-    public MyUser(String username, String password){
+    public MyUser(String username, String password, MyAuthority authority){
         this.username = username;
         this.password = password;
+        this.authority = authority;
     }
 }
