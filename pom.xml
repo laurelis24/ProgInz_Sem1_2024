@@ -70,6 +70,15 @@
     <artifactId>spring-boot-starter-security</artifactId>
     <version>3.3.4</version>
 </dependency>
+
+
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+</dependency>
 	</dependencies>
 
 	<build>
@@ -80,5 +89,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+	
 
 </project>
